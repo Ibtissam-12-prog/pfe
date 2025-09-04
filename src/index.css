@@ -1,0 +1,16 @@
+@import "tailwindcss";
+.artisans-section {
+  background: linear-gradient(
+    135deg,
+    hsla(15, 75%, 55%, 0.1),
+    hsla(15, 70%, 25%, 0.1)
+  );
+}
+.carouselContainer {
+   background: linear-gradient(
+    135deg,
+    hsla(15, 75%, 55%, 0.1),
+    hsla(15, 70%, 25%, 0.1)
+  );
+}
+

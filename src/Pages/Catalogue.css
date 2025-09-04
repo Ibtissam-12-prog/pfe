@@ -1,0 +1,239 @@
+.catalogue-container {
+  padding: 2rem 5%;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.catalogue-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 3rem 0;
+   background-image: linear-gradient(135deg, hsla(15, 75%, 55%, 0.5) 0%, hsla(15, 70%, 25%, 0.5) 100%);
+  border-radius: 15px;
+}
+
+.catalogue-hero h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.catalogue-hero p {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.filters-section {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar {
+  flex: 1;
+  min-width: 300px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #43cea2;
+}
+
+.filter-options {
+  display: flex;
+  gap: 1rem;
+}
+
+.filter-options select {
+  padding: 0.8rem 1.2rem;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: white;
+  min-width: 200px;
+}
+
+.filter-options select:focus {
+  outline: none;
+  border-color: #43cea2;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.quick-view {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+   background-image: linear-gradient(135deg, hsla(15, 75%, 55%, 0.5) 0%, hsla(15, 70%, 25%, 0.5) 100%);
+  color: white;
+  text-align: center;
+  padding: 0.8rem;
+  transition: bottom 0.3s ease;
+  cursor: pointer;
+}
+
+.product-card:hover .quick-view {
+  bottom: 0;
+}
+
+.product-info {
+  padding: 1.5rem;
+}
+
+.product-info h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.artisan {
+  color: #333;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+
+.description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.product-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.stars {
+  color: #ffd700;
+  letter-spacing: -1px;
+}
+
+.rating-value {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.add-to-cart {
+  width: 100%;
+  padding: 0.8rem;
+  background-image: linear-gradient(135deg, hsla(15, 75%, 55%, 0.5) 0%, hsla(15, 70%, 25%, 0.5) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-to-cart:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(67, 206, 162, 0.3);
+}
+
+@media (max-width: 768px) {
+  .catalogue-hero {
+    padding: 2rem 1rem;
+  }
+
+  .catalogue-hero h1 {
+    font-size: 2rem;
+  }
+
+  .filters-section {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .filter-options {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .filter-options select {
+    width: 100%;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}

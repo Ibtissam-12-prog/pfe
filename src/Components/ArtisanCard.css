@@ -1,0 +1,222 @@
+.artisanas-container {
+  padding: 2rem 5%;
+  background-color: #f8f9fa;
+}
+
+.artisanas-hero {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, hsla(15, 75%, 55%, 0.5) 0%, hsla(15, 70%, 25%, 0.5) 100%);
+  border-radius: 15px;
+}
+
+.artisanas-hero h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.artisanas-hero p {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.artisans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.artisan-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  background-color: #fff;
+  text-align: center;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.artisan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.artisan-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+}
+
+.artisan-card h3 {
+  margin: 0.5rem 0 0.25rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.artisan-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.artisan-image {
+  height: 250px;
+  overflow: hidden;
+}
+
+.artisan-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.artisan-card:hover .artisan-image img {
+  transform: scale(1.05);
+}
+
+.artisan-info {
+  padding: 1.5rem;
+}
+
+.artisan-info h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.artisan-info h3 {
+  font-size: 1.1rem;
+ color: transparent;
+background: linear-gradient(90deg, #d96f49, #b9482a);
+-webkit-background-clip: text;
+background-clip: text;
+
+  margin-bottom: 1rem;
+}
+
+.artisan-info p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.artisan-products {
+  margin-bottom: 1.5rem;
+}
+
+.artisan-products h4 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.artisan-products ul {
+  list-style: none;
+  padding: 0;
+}
+
+.artisan-products li {
+  color: #666;
+  padding: 0.3rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.artisan-products li::before {
+  content: "•";
+  color: transparent;
+background: linear-gradient(90deg, #d96f49, #b9482a);
+-webkit-background-clip: text;
+background-clip: text;
+
+  position: absolute;
+  left: 0.5rem;
+}
+
+.contact-artisan {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(90deg, #d96f49, #b9482a);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-artisan:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(67, 206, 162, 0.3);
+}
+
+.artisanas-cta {
+  text-align: center;
+  padding: 3rem;
+ background: linear-gradient(90deg, #d96f49, #b9482a);
+  border-radius: 15px;
+  color: white;
+  margin-top: 4rem;
+}
+
+.artisanas-cta h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.artisanas-cta p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.join-us-btn {
+  padding: 1rem 2.5rem;
+  background: white;
+  color: #185a9d;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.join-us-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+  .artisanas-hero {
+    padding: 3rem 1rem;
+  }
+
+  .artisanas-hero h1 {
+    font-size: 2rem;
+  }
+
+  .artisans-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .artisan-card {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .artisanas-cta {
+    padding: 2rem 1rem;
+  }
+}

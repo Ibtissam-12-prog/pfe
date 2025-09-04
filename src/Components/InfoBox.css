@@ -1,0 +1,27 @@
+/* InfoBox.css ou ArtisansSection.css */
+.info-box {
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 1rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), #fff);
+  box-shadow: 0 6px 18px rgba(10,10,10,0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(10,10,10,0.1);
+}
+
+.info-box h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.info-box p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
