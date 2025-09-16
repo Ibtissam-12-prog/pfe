@@ -4,7 +4,7 @@ import './Customize.css';
 export default function Customize() {
   const [selectedProduct, setSelectedProduct] = useState('tapis');
   const [customizations, setCustomizations] = useState({
-    color: '#43cea2',
+    color: '#E8D5C4',
     size: 'medium',
     pattern: 'traditional',
     material: 'wool',
@@ -12,29 +12,92 @@ export default function Customize() {
   });
 
   const products = [
-    { id: 'tapis', name: 'Tapis Personnalisé', image: '/img1.png' },
-    { id: 'pottery', name: 'Poterie Sur Mesure', image: '/img2.png' },
-    { id: 'textile', name: 'Textile Personnalisé', image: '/img3.png' }
+    { id: 'tapis', name: 'Tapis Personnalisé', image: 'https://i.pinimg.com/736x/1a/d8/83/1ad883137c2674405b120f7a1d8bf621.jpg' },
+    { id: 'pottery', name: 'Poterie Sur Mesure', image: 'https://i.pinimg.com/1200x/21/8a/62/218a621a27b7bfa46f17ed58b68145f4.jpg' },
+    { id: 'textile', name: 'Textile Personnalisé', image: 'https://i.pinimg.com/1200x/c2/c4/96/c2c496440dda26123bf80cd7880e7a24.jpg' },
+    { id: 'leather', name: 'Articles en Cuir', image: 'https://i.pinimg.com/736x/b0/72/1b/b0721b9e90c995370b433171e8ef7bea.jpg' },
+    { id: 'metal', name: 'Artisanat en Métal', image: 'https://i.pinimg.com/736x/42/5c/59/425c59b419c02ddfa00dcb3fcfc5be4e.jpg' },
+    { id: 'lighting', name: 'Luminaires Traditionnels', image: 'https://i.pinimg.com/736x/ba/15/5b/ba155b1ad86324266fd505989b95a476.jpg' },
+    { id: 'woodwork', name: 'Artisanat en Bois', image: 'https://i.pinimg.com/736x/7d/36/9f/7d369f1f5764973a57c1bf43658fb94f.jpg' },
+    { id: 'mosaics', name: 'Mosaïque Zellige', image: 'https://i.pinimg.com/1200x/35/f5/a9/35f5a95487c77fd5cb6e209bfab356c7.jpg' },
+    { id: 'jewellery', name: 'Bijoux Traditionnels', image: 'https://i.pinimg.com/736x/8a/a9/d7/8aa9d705b5e862ad5cf95db53d7a08e7.jpg' },
+    { id: 'embroidery', name: 'Broderie Marocaine', image: 'https://i.pinimg.com/1200x/18/da/92/18da925338021feabbf6fdb32e9bfa65.jpg' },
+    { id: 'poufs', name: 'Poufs en Cuir', image: 'https://i.pinimg.com/1200x/ac/96/11/ac96114f86d0dea4572f48a6bdfe0962.jpg' },
+    { id: 'ceramics', name: 'Céramique Fassi', image: 'https://i.pinimg.com/736x/e8/7a/9a/e87a9a0a5b6cd8385c15f1e1bac215dd.jpg' }
   ];
 
   const customizationOptions = {
     tapis: {
-      colors: ['#43cea2', '#185a9d', '#e74c3c', '#f1c40f', '#8e44ad'],
+      colors: ['#E8D5C4', '#EDDCD9', '#FFF1E6', '#F0E5CF', '#ECE5C7', '#CDC9C3'],
       sizes: ['small', 'medium', 'large', 'custom'],
-      patterns: ['traditional', 'modern', 'geometric', 'floral'],
-      materials: ['wool', 'cotton', 'silk', 'synthetic']
+      patterns: ['traditional', 'modern', 'geometric', 'floral', 'berbere', 'atlas'],
+      materials: ['wool', 'cotton', 'silk', 'synthetic', 'mixed']
     },
     pottery: {
-      colors: ['#43cea2', '#185a9d', '#e74c3c', '#f1c40f', '#8e44ad'],
+      colors: ['#F5EBE0', '#DED7C9', '#D6CCC2', '#E3D5CA', '#D5BDAF', '#E3CDC1'],
       sizes: ['small', 'medium', 'large'],
-      patterns: ['traditional', 'modern', 'abstract'],
-      materials: ['ceramic', 'terracotta', 'porcelain']
+      patterns: ['traditional', 'modern', 'abstract', 'zellige', 'floral', 'calligraphie'],
+      materials: ['ceramic', 'terracotta', 'porcelain', 'faience', 'stoneware']
     },
     textile: {
-      colors: ['#43cea2', '#185a9d', '#e74c3c', '#f1c40f', '#8e44ad'],
+      colors: ['#F5EBE0', '#E3D5CA', '#D6CCC2', '#EDEDE9', '#D5BDAF', '#E3CDC1'],
       sizes: ['small', 'medium', 'large'],
-      patterns: ['traditional', 'modern', 'geometric'],
-      materials: ['cotton', 'silk', 'wool', 'linen']
+      patterns: ['traditional', 'modern', 'geometric', 'floral', 'tribal', 'arabesque'],
+      materials: ['cotton', 'silk', 'wool', 'linen', 'velvet', 'satin']
+    },
+    leather: {
+      colors: ['#E3D5CA', '#D5BDAF', '#D6CCC2', '#EDEDE9', '#F5EBE0', '#E3CDC1'],
+      sizes: ['small', 'medium', 'large'],
+      patterns: ['plain', 'embossed', 'braided', 'tooled', 'painted', 'perforated'],
+      materials: ['cowhide', 'goatskin', 'sheepskin', 'camel', 'synthetic']
+    },
+    metal: {
+      colors: ['#F5EBE0', '#EDEDE9', '#E3D5CA', '#D6CCC2', '#D5BDAF', '#E3CDC1'],
+      sizes: ['small', 'medium', 'large'],
+      patterns: ['hammered', 'engraved', 'filigree', 'embossed', 'openwork', 'inlaid'],
+      materials: ['brass', 'copper', 'silver', 'nickel', 'bronze', 'steel']
+    },
+    lighting: {
+      colors: ['#F5EBE0', '#E3D5CA', '#D6CCC2', '#EDEDE9', '#D5BDAF', '#E3CDC1'],
+      sizes: ['small', 'medium', 'large'],
+      patterns: ['geometric', 'floral', 'stars', 'arabesque', 'modern', 'traditional'],
+      materials: ['brass', 'copper', 'glass', 'wrought-iron', 'crystal', 'mixed']
+    },
+    woodwork: {
+      colors: ['#F5EBE0', '#E3D5CA', '#D6CCC2', '#EDEDE9', '#D5BDAF', '#E3CDC1'],
+      sizes: ['small', 'medium', 'large'],
+      patterns: ['geometric', 'arabesque', 'floral', 'calligraphic', 'traditional', 'modern'],
+      materials: ['cedar', 'walnut', 'olive', 'thuya', 'oak', 'pine']
+    },
+    mosaics: {
+      colors: ['#F5EBE0', '#E3D5CA', '#D6CCC2', '#EDEDE9', '#D5BDAF', '#E3CDC1'],
+      sizes: ['small', 'medium', 'large'],
+      patterns: ['geometric', 'floral', 'star', 'octagonal', 'interlaced', 'arabian'],
+      materials: ['ceramic', 'terracotta', 'marble', 'glass', 'stone', 'mixed']
+    },
+    jewellery: {
+      colors: ['#F5EBE0', '#E3D5CA', '#D6CCC2', '#EDEDE9', '#D5BDAF', '#E3CDC1'],
+      sizes: ['small', 'medium', 'large'],
+      patterns: ['filigree', 'niello', 'enamel', 'berber', 'arabesque', 'geometric'],
+      materials: ['silver', 'gold', 'brass', 'copper', 'mixed', 'precious-stones']
+    },
+    embroidery: {
+      colors: ['#F5EBE0', '#E3D5CA', '#D6CCC2', '#EDEDE9', '#D5BDAF', '#E3CDC1'],
+      sizes: ['small', 'medium', 'large'],
+      patterns: ['floral', 'geometric', 'arabesque', 'traditional', 'modern', 'calligraphic'],
+      materials: ['silk', 'cotton', 'wool', 'linen', 'metallic-thread', 'mixed']
+    },
+    poufs: {
+      colors: ['#F5EBE0', '#E3D5CA', '#D6CCC2', '#EDEDE9', '#D5BDAF', '#E3CDC1'],
+      sizes: ['small', 'medium', 'large'],
+      patterns: ['traditional', 'geometric', 'moroccan', 'berber', 'arabesque', 'plain'],
+      materials: ['leather', 'kilim', 'suede', 'velvet', 'cotton', 'mixed']
+    },
+    ceramics: {
+      colors: ['#F5EBE0', '#E3D5CA', '#D6CCC2', '#EDEDE9', '#D5BDAF', '#E3CDC1'],
+      sizes: ['small', 'medium', 'large'],
+      patterns: ['fassi', 'floral', 'geometric', 'calligraphic', 'traditional', 'modern'],
+      materials: ['ceramic', 'faience', 'earthenware', 'porcelain', 'terracotta', 'mixed']
     }
   };
 
@@ -79,15 +142,30 @@ export default function Customize() {
       <div className="customize-content">
         <div className="product-selection">
           <h2>Choisissez votre produit</h2>
-          <div className="product-options">
-            {products.map(product => (
+          <div className="products-grid">
+            {products.map((product, index) => (
               <div
                 key={product.id}
-                className={`product-option ${selectedProduct === product.id ? 'selected' : ''}`}
+                className={`product-card ${selectedProduct === product.id ? 'selected' : ''}`}
                 onClick={() => setSelectedProduct(product.id)}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <img src={product.image} alt={product.name} />
-                <span>{product.name}</span>
+                <div className="product-image-wrapper">
+                  <img src={product.image} alt={product.name} />
+                  <div className="product-hover-effect"></div>
+                </div>
+                <div className="product-info">
+                  <h3>{product.name}</h3>
+                  <p className="customize-hint">Cliquez pour personnaliser</p>
+                  <div className="customization-preview">
+                    <span className="material-label">Matériaux disponibles:</span>
+                    <div className="materials-preview">
+                      {customizationOptions[product.id].materials.slice(0, 3).map((material) => (
+                        <span key={material} className="material-tag">{material}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

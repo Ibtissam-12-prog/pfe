@@ -1,9 +1,6 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { MapPin, Star, Award, Calendar } from "lucide-react";
-import { Link } from "react-router-dom";
-import Navigation from "@/components/Navigation";
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight, MapPin, Star } from 'lucide-react';
+import './ArtisanCarousel.css';
 
 const artisans = [
   {
@@ -15,13 +12,10 @@ const artisans = [
     specialty: "Berber Patterns",
     rating: 4.9,
     reviews: 234,
-    avatar: "👩‍🎨",
+    image: "https://i.pinimg.com/564x/8c/96/f7/8c96f7f1c93f6b85d68111a6d8767e4d.jpg",
     products: 45,
-    quote:
-      "Every carpet tells a story. Mine speak of mountain mist, ancient paths, and the dreams we weave into tomorrow.",
-    bio: "Born into a family of weavers, Fatima learned the ancient art of Berber carpet making from her grandmother. Her intricate patterns reflect the natural beauty of the Atlas Mountains.",
+    quote: "Every carpet tells a story. Mine speak of mountain mist, ancient paths, and the dreams we weave into tomorrow.",
     achievements: ["UNESCO Heritage Keeper", "Royal Patronage Award"],
-    languages: ["Arabic", "Berber", "French"],
   },
   {
     id: 2,
@@ -32,13 +26,10 @@ const artisans = [
     specialty: "Traditional Bags",
     rating: 4.8,
     reviews: 189,
-    avatar: "👨‍🎨",
+    image: "https://i.pinimg.com/564x/27/c1/2d/27c12d2f23035c16b5c8e5cc3553dd74.jpg",
     products: 32,
-    quote:
-      "Leather has a soul. My hands simply guide it to reveal its true beauty and purpose.",
-    bio: "Third-generation leather craftsman from the famous Fez tanneries. Mohammed's techniques have been passed down through his family for over a century.",
+    quote: "Leather has a soul. My hands simply guide it to reveal its true beauty and purpose.",
     achievements: ["Master Craftsman Certificate", "Export Excellence Award"],
-    languages: ["Arabic", "French", "English"],
   },
   {
     id: 3,
@@ -49,16 +40,10 @@ const artisans = [
     specialty: "Tuareg Jewelry",
     rating: 5.0,
     reviews: 156,
-    avatar: "👩‍🎨",
+    image: "https://i.pinimg.com/564x/d7/96/93/d796937b8390b43d0963dcb2226cecd7.jpg",
     products: 67,
-    quote:
-      "Each piece of silver carries the songs of the desert and the dreams of the nomads who inspired it.",
-    bio: "Aicha learned the ancient Tuareg silversmithing techniques from the desert nomads. Her jewelry reflects the mystique and beauty of the Sahara.",
-    achievements: [
-      "Cultural Heritage Ambassador",
-      "Women Artisan Leadership Award",
-    ],
-    languages: ["Arabic", "Tamazight", "French"],
+    quote: "Each piece of silver carries the songs of the desert and the dreams of the nomads who inspired it.",
+    achievements: ["Cultural Heritage Ambassador", "Women Artisan Leadership Award"],
   },
   {
     id: 4,
@@ -69,157 +54,207 @@ const artisans = [
     specialty: "Traditional Tagines",
     rating: 4.7,
     reviews: 203,
-    avatar: "👨‍🎨",
+    image: "https://i.pinimg.com/564x/63/c1/48/63c148ecef1603173274aa8436c6f366.jpg",
     products: 28,
-    quote:
-      "Clay remembers everything - the rain, the earth, the hands that shaped it. My pottery carries the memory of Morocco.",
-    bio: "Hassan's family has been crafting pottery in Safi for generations. His tagines and ceramics are known throughout Morocco for their quality and beauty.",
-    achievements: [
-      "National Pottery Excellence",
-      "Traditional Craft Preservation Medal",
-    ],
-    languages: ["Arabic", "French"],
+    quote: "Clay remembers everything - the rain, the earth, the hands that shaped it. My pottery carries the memory of Morocco.",
+    achievements: ["National Pottery Excellence", "Traditional Craft Preservation Medal"],
   },
+  {
+    id: 5,
+    name: "Amira Zouaoui",
+    craft: "Zellige Mosaic Artist",
+    region: "Tetouan",
+    experience: 20,
+    specialty: "Geometric Patterns",
+    rating: 4.9,
+    reviews: 178,
+    image: "https://i.pinimg.com/564x/6c/94/5f/6c945f437762d2ac65ae27e90408a4ed.jpg",
+    products: 55,
+    quote: "In each tile lies a universe of patterns, a language written in color and geometry.",
+    achievements: ["Artisan Excellence Award", "Heritage Preservation Honor"],
+  },
+  {
+    id: 6,
+    name: "Karim Benjelloun",
+    craft: "Wood Carving Master",
+    region: "Essaouira",
+    experience: 35,
+    specialty: "Traditional Doors",
+    rating: 4.8,
+    reviews: 245,
+    image: "https://i.pinimg.com/564x/8c/2f/84/8c2f84e9ee9a90c60bc309d68741b899.jpg",
+    products: 40,
+    quote: "Wood speaks to those who listen. I simply help it tell its story.",
+    achievements: ["Master Artisan Award", "Cultural Heritage Medal"],
+  },
+  {
+    id: 7,
+    name: "Leila Benomar",
+    craft: "Embroidery Artist",
+    region: "Rabat",
+    experience: 28,
+    specialty: "Gold Thread Work",
+    rating: 4.9,
+    reviews: 167,
+    image: "https://i.pinimg.com/564x/0b/8e/0f/0b8e0f158659d62ff6abe2f8068d2a3b.jpg",
+    products: 89,
+    quote: "Each stitch is a letter, each pattern a poem written in thread and light.",
+    achievements: ["Royal Craftsmanship Award", "Innovation in Tradition Prize"],
+  },
+  {
+    id: 8,
+    name: "Omar El Alami",
+    craft: "Metal Work Master",
+    region: "Marrakech",
+    experience: 32,
+    specialty: "Brass Lanterns",
+    rating: 4.7,
+    reviews: 198,
+    image: "https://i.pinimg.com/564x/97/62/c5/9762c5f5f75de557114fb9d3d33a5cd7.jpg",
+    products: 62,
+    quote: "Metal is like light - it can be shaped into dreams that illuminate the darkness.",
+    achievements: ["Craft Innovation Award", "Excellence in Metalwork"],
+  },
+  {
+    id: 9,
+    name: "Sofia Meknassi",
+    craft: "Textile Weaver",
+    region: "Meknes",
+    experience: 24,
+    specialty: "Silk Fabrics",
+    rating: 4.8,
+    reviews: 156,
+    image: "https://i.pinimg.com/564x/c2/c4/96/c2c496440dda26123bf80cd7880e7a24.jpg",
+    products: 73,
+    quote: "In the dance of threads, we weave not just fabric, but stories of our heritage.",
+    achievements: ["Textile Arts Excellence", "Traditional Craft Preservation"],
+  },
+  {
+    id: 10,
+    name: "Youssef Tahiri",
+    craft: "Calligraphy Master",
+    region: "Fez",
+    experience: 40,
+    specialty: "Arabic Scripts",
+    rating: 5.0,
+    reviews: 223,
+    image: "https://i.pinimg.com/564x/27/7a/97/277a97b771c9b62656177a947890417c.jpg",
+    products: 95,
+    quote: "Each letter is a melody, each word a symphony of our cultural heritage.",
+    achievements: ["Master Calligrapher Award", "Islamic Arts Excellence"],
+  }
 ];
 
+import { useState } from 'react';
+import { ChevronLeft, ChevronRight, MapPin, Star } from 'lucide-react';
+import './ArtisanCarousel.css';
+
 export default function Artisans() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const handleNext = () => {
+    if (!isTransitioning) {
+      setIsTransitioning(true);
+      setActiveIndex((prev) => (prev + 1) % artisans.length);
+      setTimeout(() => setIsTransitioning(false), 500);
+    }
+  };
+
+  const handlePrev = () => {
+    if (!isTransitioning) {
+      setIsTransitioning(true);
+      setActiveIndex((prev) => (prev - 1 + artisans.length) % artisans.length);
+      setTimeout(() => setIsTransitioning(false), 500);
+    }
+  };
+
+  const getCardClassName = (index) => {
+    const diff = (index - activeIndex + artisans.length) % artisans.length;
+    if (diff === 0) return 'artisan-card active';
+    if (diff === 1 || diff === -2) return 'artisan-card right';
+    return 'artisan-card left';
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <Navigation />
-
-      {/* Header */}
-      <section className="bg-gradient-sunset py-16 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Meet the Artisans
-            </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Discover the passionate masters behind every piece. Their stories,
-              skills, and heritage bring authentic Moroccan craftsmanship to
-              life.
-            </p>
-          </div>
-        </div>
-      </section>
-
+    <div className="min-h-screen bg-[#f8f9fa]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Artisan Profiles */}
-        <div className="grid gap-12">
-          {artisans.map((artisan, index) => (
-            <Card
-              key={artisan.id}
-              className={`overflow-hidden animate-fade-in ${
-                index % 2 === 1 ? "lg:flex-row-reverse" : ""
-              }`}
-              style={{ animationDelay: `${index * 200}ms` }}
-            >
-              <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-                {/* Profile Image & Stats */}
-                <div className="lg:col-span-4 p-8 bg-gradient-earth">
-                  <div className="text-center">
-                    <div className="text-8xl mb-4">{artisan.avatar}</div>
-                    <h2 className="text-2xl font-bold mb-2">{artisan.name}</h2>
-                    <p className="text-lg text-primary font-semibold mb-1">
-                      {artisan.craft}
-                    </p>
-                    <div className="flex items-center justify-center gap-2 text-muted-foreground mb-4">
-                      <MapPin className="h-4 w-4" />
-                      <span>{artisan.region}</span>
-                    </div>
+        <header className="text-center mb-12">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gray-800">
+            Rencontrez Nos Artisans
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Découvrez les maîtres passionnés derrière chaque pièce. Leur savoir-faire 
+            et leur patrimoine donnent vie à l'artisanat marocain authentique.
+          </p>
+        </header>
 
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-primary">
-                          {artisan.experience}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Years
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-primary">
-                          {artisan.products}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Products
-                        </div>
-                      </div>
-                    </div>
+        <div className="artisans-carousel">
+          <div className="carousel-container">
+            {artisans.map((artisan, index) => (
+              <div
+                key={artisan.id}
+                className={getCardClassName(index)}
+                style={{
+                  transform: `translateX(${(index - activeIndex) * 120}%) 
+                             scale(${index === activeIndex ? 1.1 : 0.8}) 
+                             rotateY(${(index - activeIndex) * 10}deg)`
+                }}
+              >
+                <img
+                  src={artisan.image}
+                  alt={artisan.name}
+                  className="artisan-image"
+                />
+                <div className="artisan-content">
+                  <h3 className="artisan-name">{artisan.name}</h3>
+                  <p className="artisan-craft">{artisan.craft}</p>
+                  
+                  <div className="artisan-stats">
+                    <span className="stat">
+                      <MapPin size={16} />
+                      {artisan.region}
+                    </span>
+                    <span className="stat">
+                      <Star size={16} />
+                      {artisan.rating} ({artisan.reviews})
+                    </span>
+                  </div>
 
-                    <div className="flex items-center justify-center gap-2 mb-4">
-                      <Star className="h-5 w-5 text-gold fill-gold" />
-                      <span className="font-semibold">{artisan.rating}</span>
-                      <span className="text-muted-foreground">
-                        ({artisan.reviews} reviews)
+                  <p className="artisan-quote">"{artisan.quote}"</p>
+
+                  <div className="artisan-achievements">
+                    {artisan.achievements.map((achievement, i) => (
+                      <span key={i} className="achievement-badge">
+                        {achievement}
                       </span>
-                    </div>
-
-                    <Badge variant="outline" className="mb-4">
-                      {artisan.specialty}
-                    </Badge>
-                  </div>
-                </div>
-
-                {/* Profile Details */}
-                <div className="lg:col-span-8 p-8">
-                  <blockquote className="accent-border text-xl italic mb-6 leading-relaxed">
-                    "{artisan.quote}"
-                  </blockquote>
-
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    {artisan.bio}
-                  </p>
-
-                  <div className="grid md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                      <h4 className="font-semibold mb-3 flex items-center gap-2">
-                        <Award className="h-5 w-5 text-primary" />
-                        Achievements
-                      </h4>
-                      <ul className="space-y-2">
-                        {artisan.achievements.map((achievement, i) => (
-                          <li
-                            key={i}
-                            className="text-sm text-muted-foreground flex items-center gap-2"
-                          >
-                            <span className="w-2 h-2 bg-gold rounded-full"></span>
-                            {achievement}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold mb-3">Languages</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {artisan.languages.map((language, i) => (
-                          <Badge key={i} variant="secondary">
-                            {language}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <Link to={`/catalogue?artisan=${artisan.id}`}>
-                      <Button className="btn-hero">
-                        View {artisan.name}'s Work
-                      </Button>
-                    </Link>
-                    <Button variant="outline">
-                      <Calendar className="mr-2 h-4 w-4" />
-                      Schedule Visit
-                    </Button>
+                    ))}
                   </div>
                 </div>
               </div>
-            </Card>
-          ))}
+            ))}
+          </div>
+
+          <div className="navigation-buttons">
+            <button className="nav-button" onClick={handlePrev}>
+              <ChevronLeft size={24} />
+            </button>
+            <button className="nav-button" onClick={handleNext}>
+              <ChevronRight size={24} />
+            </button>
+          </div>
+
+          <div className="carousel-controls">
+            {artisans.map((_, index) => (
+              <div
+                key={index}
+                className={`carousel-dot ${index === activeIndex ? 'active' : ''}`}
+                onClick={() => setActiveIndex(index)}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* Call to Action */}
         <section className="mt-20 py-16 bg-gradient-moroccan rounded-2xl text-white text-center">
           <div className="max-w-3xl mx-auto px-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in">
@@ -227,8 +262,7 @@ export default function Artisans() {
             </h2>
             <p className="text-xl mb-8 text-white/90 animate-fade-in">
               Every purchase directly supports these talented artisans and helps
-              preserve traditional Moroccan craftsmanship for future
-              generations.
+              preserve traditional Moroccan craftsmanship for future generations.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in">
               <Link to="/catalogue">

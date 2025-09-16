@@ -1,0 +1,258 @@
+.artisanas-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 2rem 0;
+  transition: all 0.3s ease;
+}
+
+/* ملي الفورم يبان، الصفحة تولي شفافة وblur */
+.artisanas-container.dimmed {
+  filter: blur(4px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.artisanas-hero {
+  text-align: center;
+  padding: 3rem 0;
+  margin-bottom: 4rem;
+  background: linear-gradient(135deg, #F5EBE0 0%, #D6CCC2 100%);
+}
+
+.artisanas-hero h1 {
+  font-size: 3.5rem;
+  color: #2d3748;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.artisanas-hero p {
+  font-size: 1.2rem;
+  color: #4a5568;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.artisans-grid {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.artisan-card {
+  position: relative;
+  height: 450px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.card-content {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 20px;
+  overflow: visible;
+}
+
+.artisan-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.artisan-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artisan-info {
+  padding: 1.5rem;
+}
+
+.artisan-info h2 {
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.artisan-info h3 {
+  font-size: 1.1rem;
+  color: #718096;
+  margin-bottom: 1rem;
+}
+
+.artisan-info p {
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.artisan-products {
+  margin-top: 1rem;
+}
+
+.artisan-products h4 {
+  font-size: 0.9rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+/* === Modal Styles === */
+.modal-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-form {
+  background: rgba(255, 255, 255, 0.75); /* شفافية أعلى */
+  border-radius: 20px;
+  width: 380px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  position: relative;
+  animation: fadeInScale 0.3s ease;
+  z-index: 2100;
+
+  
+}
+.modal-form h2 {
+  font-size: 1.8rem;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  text-align: center; /* لتوسيط العنوان فقط */
+  width: 100%;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #2d3748;
+}
+
+.modal-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.modal-form input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.65); /* شفافية أعلى */
+  color: #2d3748;
+  outline: none;
+  font-size: 0.95rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-form input:focus {
+  border-color: #a67c52; /* لون متناسق مع الثيم */
+  box-shadow: 0 0 6px rgba(166,124,82,0.4);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  background: #a67c52; /* لون متناسق مع الثيم */
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #855f3f;
+}
+
+.switch-form {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.switch-form span {
+  color: #a67c52; /* لون متناسق */
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* === Animations === */
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+.artisanas-cta {
+  text-align: center;
+  padding: 3rem 1rem;
+  margin-top: 3rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #F5EBE0 0%, #D6CCC2 100%);
+  color: #2d3748;
+  background-size: 200% 200%;
+  animation: gradientAnimation 5s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.artisanas-cta h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.artisanas-cta p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.artisanas-cta .join-us-btn {
+  padding: 12px 30px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  background-image: linear-gradient(135deg, hsla(15, 75%, 55%, 0.5) 0%, hsla(15, 70%, 25%, 0.5) 100%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.artisanas-cta .join-us-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+

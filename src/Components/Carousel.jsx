@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 
 const Carousel = ({ autoPlay = true, autoPlayInterval = 4000 }) => {
   const images = [
+    { url: "img2 (1).png", title: "Traditional Moroccan Pottery" },
     { url: "img2.png", title: "Traditional Moroccan Pottery" },
     { url: "img1.png", title: "Handmade Jewelry" },
     { url: "img4.png", title: "Artisan Carpets" },
     { url: "img6.png", title: "Wood Carvings" },
     { url: "img7.png", title: "Natural Scenery" },
+    { url: "img8.png", title: "Natural Scenery" },
+    { url: "https://i.pinimg.com/736x/c3/79/90/c379903b8e5556c14f64e04b7419a0ad.jpg", title: "Natural Scenery" },
+     { url: "img11.png", title: "Natural Scenery" },
+     { url: "img12.png", title: "Natural Scenery" }
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
