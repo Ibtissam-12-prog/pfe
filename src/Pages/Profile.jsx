@@ -15,6 +15,7 @@ function Profile() {
   const [showProductForm, setShowProductForm] = useState(false);
   const [productForm, setProductForm] = useState({ name: "", description: "", price: "", image: null });
   const [editingProduct, setEditingProduct] = useState(null); // Stores product being edited
+  const [successMessage, setSuccessMessage] = useState(""); // New state for success messages
  
   const handleProductChange = (e) => {
     const { name, value, files } = e.target;
@@ -118,14 +119,48 @@ function Profile() {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
-      if (res.ok && data._id) {
+      if (res.ok && data.message === "Product removed") {
         setProducts((prev) => prev.filter((p) => p._id !== productId));
-        setError("Product deleted successfully.");
+        setSuccessMessage("Product deleted successfully."); // Use success message state
+        setTimeout(() => setSuccessMessage(""), 3000); // Clear success message after 3 seconds
       } else {
         setError(data.message || "Failed to delete product.");
       }
     } catch (err) {
       setError("Failed to delete product.");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleUpdate = async () => {
+    setError("");
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch("http://localhost:3000/api/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setProfile(prev => ({ ...prev, ...data }));
+        setShowUpdate(false);
+        // Show success message
+        setSuccessMessage("Profile updated successfully!"); // Use success message state
+        setTimeout(() => setSuccessMessage(""), 3000); // Clear success message after 3 seconds
+      } else {
+        setError(data.message || "Update failed");
+      }
+    } catch (err) {
+      console.error("Update error:", err);
+      setError("Failed to update profile. Please try again.");
     }
   };
 
@@ -222,6 +257,8 @@ function Profile() {
     return <div className="p-8 text-center">No profile data</div>;
   }
 
+  const isArtisan = (profile?.role === 'artisan') || (profile?.type === 'artisan');
+
   console.log("Render: Profile component rendering main JSX with profile:", profile);
   return (
     <div className="min-h-[60vh] flex flex-col items-center bg-blue-100 px-4 py-10">
@@ -229,6 +266,14 @@ function Profile() {
         {/* Cover section */}
         <div className="w-full h-32 md:h-40 bg-gradient-to-r from-orange-200 to-orange-400 rounded-t-xl relative flex items-end justify-center">
           <div className="absolute left-1/2 transform -translate-x-1/2 translate-y-1/2 z-10">
+            {/* Always-present hidden input to trigger file selection from the camera icon */}
+            <input
+              id="profile-image-trigger"
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleImageChange}
+            />
             {imageLoading ? (
               <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-lg bg-white flex items-center justify-center text-gray-400 text-2xl animate-pulse">
                 Uploading...
@@ -245,13 +290,28 @@ function Profile() {
                 />
               </label>
             ) : profile.image ? (
-              <img
-                src={profile.image?.startsWith('/uploads') ? `http://localhost:3000${profile.image}` : profile.image}
-                alt={profile.name}
-                className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-lg object-cover bg-white"
-                style={{ objectFit: "cover" }}
-                onError={e => { e.target.onerror=null; e.target.src='/img1.png'; }}
-              />
+              <div className="relative w-32 h-32 md:w-40 md:h-40">
+                <img
+                  src={profile.image?.startsWith('/uploads') ? `http://localhost:3000${profile.image}` : profile.image}
+                  alt={profile.name}
+                  className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-lg object-cover bg-white"
+                  style={{ objectFit: "cover" }}
+                  onError={e => { e.target.onerror=null; e.target.src='/img1.png'; }}
+                />
+                {/* Floating camera icon button at bottom-right of avatar */}
+                <label
+                  htmlFor="profile-image-trigger"
+                  title="Change photo"
+                  className="absolute -right-1 -bottom-1 md:right-0 md:bottom-0 p-2 rounded-full bg-white shadow-md cursor-pointer hover:shadow-lg transition"
+                  style={{
+                    backgroundImage: "linear-gradient(135deg, hsla(15,75%,95%,1) 0%, hsla(15,70%,90%,1) 100%)"
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-gray-700">
+                    <path d="M9 2a1 1 0 0 0-.894.553L7.382 4H5a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3h-2.382l-.724-1.447A1 1 0 0 0 14 2H9zm3 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" />
+                  </svg>
+                </label>
+              </div>
             ) : (
               <label htmlFor="profile-image-upload" className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-lg bg-white flex items-center justify-center text-gray-400 text-4xl cursor-pointer hover:bg-gray-100 transition">
                 <span className="text-gray-300">+</span>
@@ -276,6 +336,9 @@ function Profile() {
             )}
             {error && (
               <div className="text-red-500 text-sm mt-2">{error}</div>
+            )}
+            {successMessage && (
+              <div className="text-green-500 text-sm mt-2">{successMessage}</div>
             )}
           </div>
         </div>
@@ -332,15 +395,20 @@ function Profile() {
         <div className="w-full mt-8">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-bold text-orange-900 text-left">Products</h3>
-            <button
-              className="py-1 px-4 text-sm text-white rounded-lg shadow-md hover:opacity-90 transition"
-              style={{backgroundImage:"linear-gradient(135deg, hsla(15,75%,55%,0.5) 0%, hsla(15,70%,25%,0.5) 100%)"}}
-              onClick={() => setShowProductForm((v) => !v)}
-            >
-              {showProductForm ? "Cancel" : "Share Product"}
-            </button>
+            {isArtisan && (
+              <button
+                className="py-1 px-4 text-sm text-white rounded-lg shadow-md hover:opacity-90 transition"
+                style={{backgroundImage:"linear-gradient(135deg, hsla(15,75%,55%,0.5) 0%, hsla(15,70%,25%,0.5) 100%)"}}
+                onClick={() => setShowProductForm((v) => !v)}
+              >
+                {showProductForm ? "Cancel" : "Share Product"}
+              </button>
+            )}
           </div>
-          {showProductForm && (
+          {!isArtisan && (
+            <div className="mb-4 text-sm text-gray-600">Only artisans can add items to the shop.</div>
+          )}
+          {isArtisan && showProductForm && (
             <form className="mb-6 bg-gray-50 rounded-lg p-6 shadow" onSubmit={handleProductSubmit} encType="multipart/form-data">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <input name="name" placeholder="Product Name" value={productForm.name} onChange={handleProductChange} className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400" required />

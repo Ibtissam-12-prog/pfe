@@ -6,6 +6,9 @@ import './ArtisanasCarousel.css';
 export default function Artisanas() {
   const [showForm, setShowForm] = useState(false); 
   const [isLogin, setIsLogin] = useState(true); 
+  const [artisans, setArtisans] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const middleRowRef = useRef(null);
   const leftCardRef = useRef(null);
   const rightCardRef = useRef(null);
@@ -16,6 +19,31 @@ export default function Artisanas() {
       once: true,
       offset: 100,
     });
+    // Fetch artisans from backend
+    const fetchArtisans = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/api/users?role=artisan');
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.message || 'Failed to load artisans');
+        }
+        // Map to the structure used in cards
+        const mapped = (Array.isArray(data) ? data : []).map(u => ({
+          id: u._id,
+          name: u.name,
+          specialty: u.specialty || '—',
+          sector: u.sector || '—',
+          description: u.description || '',
+          image: u.image ? (u.image.startsWith('/uploads') ? `http://localhost:3000${u.image}` : u.image) : '/img1.png',
+        }));
+        setArtisans(mapped);
+      } catch (e) {
+        setError(e.message || 'Failed to load artisans');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchArtisans();
   }, []);
 
   const handleJoinClick = () => {
@@ -26,80 +54,12 @@ export default function Artisanas() {
     setShowForm(false);
   };
 
-  const artisans = [
-    {
-      id: 1,
-      name: "Fatima Zahra",
-      specialty: "Traditional weaving",
-      image: "Tissage.jpg",
-      description: "Expert in traditional Moroccan weaving with over 15 years of experience.",
-      products: ["Carpets", "Blankets", "Decorative textiles"]
-    },
-    {
-      id: 2,
-      name: "Mohammed Alami",
-      specialty: "Pottery and Ceramics",
-      image: "artisansCeramique.jpg",
-      description: "Master craftsman specializing in traditional and modern pottery.",
-      products: ["Vases", "Tableware", "Wall decorations"]
-    },
-    {
-      id: 3,
-      name: "Amina Benali",
-      specialty: "Embroidery",
-      image: "tarz.png",
-      description: "Talented artisan creating unique pieces of Moroccan embroidery.",
-      products: ["Caftans", "Embroidered tablecloths", "Decorative cushions"]
-    },
-    {
-      id: 4,
-      name: "Karim Mansouri",
-      specialty: "Woodwork",
-      image: "najar.jpg",
-      description: "Artisan specializing in wood carving and traditional furniture making.",
-      products: ["Furniture", "Sculptures", "Traditional doors"]
-    },
-    {
-      id: 5,
-      name: "Youssef Benjelloun",
-      specialty: "Zellige",
-      image: "zellige.jpg",
-      description: "Master artisan specializing in traditional Moroccan zellige art.",
-      products: ["Mosaics", "Fountains", "Decorative panels"]
-    },
-    {
-      id: 6,
-      name: "Hassan Tazi",
-      specialty: "Artistic Ironwork",
-      image: "hadid.jpg",
-      description: "Artistic blacksmith creating unique pieces in wrought iron.",
-      products: ["Lanterns", "Wrought iron doors", "Decorative objects"]
-    },
-    {
-      id: 7,
-      name: "Samira El Fassi",
-      specialty: "Traditional Jewelry",
-      image: "bijoux.jpg",
-      description: "Creator of traditional Moroccan jewelry in silver and precious stones.",
-      products: ["Necklaces", "Bracelets", "Earrings"]
-    },
-    {
-      id: 8,
-      name: "Youssef Benjelloun",
-      specialty: "Leatherwork",
-      image: "jald.png",
-      description: "Leather craftsman specializing in traditional leatherwork.",
-      products: ["Bags", "Poufs", "Leather accessories"]
-    },
-    {
-      id: 9,
-      name: "Nadir Ziani",
-      specialty: "Calligraphy",
-      image: "https://i.pinimg.com/originals/dd/48/e5/dd48e513b257c74a8e44a6453f912d7b.jpg",
-      description: "Expert calligrapher in traditional Arabic art and modern design.",
-      products: ["Paintings", "Custom objects", "Custom works"]
-    }
-  ];
+  if (loading) {
+    return <div className="p-8 text-center">Loading artisans...</div>;
+  }
+  if (error) {
+    return <div className="p-8 text-center text-red-500">{error}</div>;
+  }
 
   return (
     <>
@@ -116,7 +76,7 @@ export default function Artisanas() {
           <div className="grid-row">
             {artisans.slice(0, 3).map((artisan, i) => (
               <div 
-                key={artisan.id} 
+                key={artisan.id}
                 className="artisan-card" 
                 data-aos={i === 0 ? "fade-right" : i === 1 ? "zoom-in" : "fade-left"}
                 data-aos-delay={i * 200}
@@ -128,15 +88,8 @@ export default function Artisanas() {
                   <div className="artisan-info">
                     <h2>{artisan.name}</h2>
                     <h3>{artisan.specialty}</h3>
+                    {artisan.sector && <p className="text-sm text-gray-600">Sector: {artisan.sector}</p>}
                     <p>{artisan.description}</p>
-                    <div className="artisan-products">
-                      <h4>Spécialités:</h4>
-                      <ul>
-                        {artisan.products.map((product, index) => (
-                          <li key={index}>{product}</li>
-                        ))}
-                      </ul>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -160,15 +113,8 @@ export default function Artisanas() {
                   <div className="artisan-info">
                     <h2>{artisan.name}</h2>
                     <h3>{artisan.specialty}</h3>
+                    {artisan.sector && <p className="text-sm text-gray-600">Sector: {artisan.sector}</p>}
                     <p>{artisan.description}</p>
-                    <div className="artisan-products">
-                      <h4>Spécialités:</h4>
-                      <ul>
-                        {artisan.products.map((product, index) => (
-                          <li key={index}>{product}</li>
-                        ))}
-                      </ul>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -191,15 +137,8 @@ export default function Artisanas() {
                   <div className="artisan-info">
                     <h2>{artisan.name}</h2>
                     <h3>{artisan.specialty}</h3>
+                    {artisan.sector && <p className="text-sm text-gray-600">Sector: {artisan.sector}</p>}
                     <p>{artisan.description}</p>
-                    <div className="artisan-products">
-                      <h4>Spécialités:</h4>
-                      <ul>
-                        {artisan.products.map((product, index) => (
-                          <li key={index}>{product}</li>
-                        ))}
-                      </ul>
-                    </div>
                   </div>
                 </div>
               </div>

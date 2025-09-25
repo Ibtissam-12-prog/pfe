@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Auth() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+function Auth(props) {
+  const [form, setForm] = useState({ name: "", email: "", password: "", sector: "", description: "", specialty: "" });
   const [userForm, setUserForm] = useState({ name: "", email: "", password: "" });
   const [token, setToken] = useState("");
   const [profile, setProfile] = useState(null);
@@ -11,6 +11,9 @@ function Auth() {
   const [isRegister, setIsRegister] = useState(false);
   const [activeTab, setActiveTab] = useState("artisan");
   const navigate = useNavigate();
+
+  // Destructure checkLoginStatus from props
+  const { checkLoginStatus } = props;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,14 +27,16 @@ function Auth() {
       const res = await fetch("http://localhost:3000/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        // Send role from active tab so backend persists it
+        body: JSON.stringify({ ...form, type: activeTab }),
       });
       const data = await res.json();
       if (res.ok) {
         setToken(data.token);
         setMessage("Registered successfully!");
-        setProfile({ _id: data._id, name: data.name, email: data.email });
+        setProfile({ _id: data._id, name: data.name, email: data.email, role: activeTab });
         localStorage.setItem("token", data.token);
+        checkLoginStatus(); // Update login status
         navigate("/profile");
       } else {
         setMessage(data.message);
@@ -53,8 +58,9 @@ function Auth() {
       if (res.ok) {
         setToken(data.token);
         setMessage("Logged in successfully!");
-        setProfile({ _id: data._id, name: data.name, email: data.email });
+        setProfile({ _id: data._id, name: data.name, email: data.email, role: data.borderLeft });
         localStorage.setItem("token", data.token);
+        checkLoginStatus(); // Update login status
         navigate("/profile");
       } else {
         setMessage(data.message);
@@ -92,6 +98,7 @@ function Auth() {
       if (res.ok) {
         setUserMessage("Registered successfully!");
         localStorage.setItem("token", data.token);
+        checkLoginStatus(); // Update login status
         navigate("/profile");
       } else {
         setUserMessage(data.message || "Registration failed.");
@@ -108,7 +115,7 @@ function Auth() {
         <div className="flex mb-6 w-full">
           <button
             className={`flex-1 py-2 font-semibold rounded-l-lg border transition-colors duration-200 ${activeTab === "artisan"
-              ? "text-white" 
+              ? "text-white"
               : "text-gray-700"}`}
             style={{
               backgroundImage: activeTab === "artisan"
@@ -122,7 +129,7 @@ function Auth() {
           </button>
           <button
             className={`flex-1 py-2 font-semibold rounded-r-lg border transition-colors duration-200 ${activeTab === "user"
-              ? "text-white" 
+              ? "text-white"
               : "text-gray-700"}`}
             style={{
               backgroundImage: activeTab === "user"
@@ -149,13 +156,40 @@ function Auth() {
             </h2>
             <div className="space-y-4">
               {isRegister && (
-                <input
-                  name="name"
-                  placeholder="Name"
-                  value={activeTab === "artisan" ? form.name : userForm.name}
-                  onChange={activeTab === "artisan" ? handleChange : handleUserChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-                />
+                <>
+                  <input
+                    name="name"
+                    placeholder="Name"
+                    value={activeTab === "artisan" ? form.name : userForm.name}
+                    onChange={activeTab === "artisan" ? handleChange : handleUserChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  />
+                  {activeTab === "artisan" && (
+                    <>
+                      <input
+                        name="sector"
+                        placeholder="Sector"
+                        value={form.sector}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+                      />
+                      <input
+                        name="specialty"
+                        placeholder="Specialty"
+                        value={form.specialty}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+                      />
+                      <textarea
+                        name="description"
+                        placeholder="Description"
+                        value={form.description}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+                      />
+                    </>
+                  )}
+                </>
               )}
               <input
                 name="email"

@@ -102,10 +102,9 @@ export default function Catalogue() {
       <div className="products-grid">
         {filteredProducts.map(product => (
           <div key={product._id || product.id} className="product-card">
-            <div className="product-image">
-              <img src={product.image} alt={product.name} />
-              <div className="quick-view">Quick view</div>
-            </div>
+          <div className="product-image">
+            <img src={product.image} alt={product.name} />
+          </div>
             <div className="product-info">
               <h3>{product.name}</h3>
               <p className="artisan">{product.artisan ? `By ${product.artisan}` : ''}</p>

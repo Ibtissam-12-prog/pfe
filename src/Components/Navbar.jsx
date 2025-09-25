@@ -1,20 +1,28 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Connexion from "./Connexion";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, handleLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const links = [
+  const loggedInLinks = [
     { name: "Home", path: "/" },
     { name: "Artisans", path: "/artisans" },
     { name: "Customize", path: "/customize" },
     { name: "Collection", path: "/collection" },
     { name: "Contact", path: "/contact" },
     { name: "Profile", path: "/profile" },
-    { name: "Login / Register", path: "/auth" },
-
   ];
+
+  const loggedOutLinks = [
+    { name: "Home", path: "/" },
+    { name: "Artisans", path: "/artisans" },
+    { name: "Customize", path: "/customize" },
+    { name: "Collection", path: "/collection" },
+    { name: "Contact", path: "/contact" },
+    { name: "Login / Register", path: "/auth" },
+  ];
+
+  const currentLinks = isLoggedIn ? loggedInLinks : loggedOutLinks;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-200 shadow-sm">
@@ -34,9 +42,9 @@ const Navbar = () => {
             </h1>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {links.map((link) => (
+          {/* Desktop Navigation - centered */}
+          <div className="hidden md:flex flex-1 justify-center items-center space-x-8">
+            {currentLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
@@ -45,10 +53,13 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+          </div>
 
+          {/* Desktop Actions - right aligned */}
+          <div className="hidden md:flex items-center space-x-3">
             <Link
               to="/shop"
-              className="px-4 py-2 text-white rounded-lg text-sm font-medium shadow-md hover:opacity-90 transition"
+              className="px-4 mx-2 py-2 text-white rounded-lg text-sm font-medium shadow-md hover:opacity-90 transition"
               style={{
                 backgroundImage:
                   "linear-gradient(135deg, hsla(15, 75%, 55%, 0.5) 0%, hsla(15, 70%, 25%, 0.5) 100%)",
@@ -56,6 +67,18 @@ const Navbar = () => {
             >
               Shop Now
             </Link>
+            {isLoggedIn && (
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 text-white rounded-lg text-sm font-medium shadow-md hover:opacity-90 transition"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(135deg, hsla(15, 75%, 55%, 0.5) 0%, hsla(15, 70%, 25%, 0.5) 100%)",
+                }}
+              >
+                Logout
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -85,7 +108,7 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col space-y-3">
-              {links.map((link) => (
+              {currentLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
@@ -107,6 +130,18 @@ const Navbar = () => {
                 >
                   Shop Now
                 </Link>
+                {isLoggedIn && (
+                  <button
+                    onClick={() => {handleLogout(); setIsMenuOpen(false);}}
+                    className="block text-center text-white rounded-lg text-sm font-medium shadow-md hover:opacity-90 transition px-4 py-2 mt-2"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(135deg, hsla(15, 75%, 55%, 0.5) 0%, hsla(15, 70%, 25%, 0.5) 100%)",
+                    }}
+                  >
+                    Logout
+                  </button>
+                )}
               </div>
             </div>
           </div>
