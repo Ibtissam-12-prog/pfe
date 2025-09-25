@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Connexion from "./Connexion";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,8 +9,11 @@ const Navbar = () => {
     { name: "Home", path: "/" },
     { name: "Artisans", path: "/artisans" },
     { name: "Customize", path: "/customize" },
-    { name: "Collectione", path: "/collection" },
+    { name: "Collection", path: "/collection" },
     { name: "Contact", path: "/contact" },
+    { name: "Profile", path: "/profile" },
+    { name: "Login / Register", path: "/auth" },
+
   ];
 
   return (
@@ -25,7 +29,8 @@ const Navbar = () => {
                   "linear-gradient(135deg, hsla(15, 75%, 55%, 0.5) 0%, hsla(15, 70%, 25%, 0.5) 100%)",
               }}
             >
-              B-Easy
+              <img src="/logo1.png" alt="Logo" className="h-10 w-auto mt-1 inline-block align-middle" />
+              <span className="align-middle">-Easy</span>
             </h1>
           </div>
 

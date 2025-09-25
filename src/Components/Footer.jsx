@@ -8,7 +8,18 @@ const Footer = () => {
           <div className="footer__grid">
             {/* Brand */}
             <div className="footer__brand">
-              <h3 className="footer__logo">B-Easy</h3>
+              <div className="flex items-center" style={{ minHeight: '10px' }}>
+                <h3
+                  className="footer__logo text-2xl font-bold bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(135deg, hsla(15, 75%, 55%, 0.5) 0%, hsla(45, 31%, 95%, 1.00) 100%)",
+                  }}
+                >
+                  <img src="/logo1.png" alt="Logo" className="h-10 w-auto mt-1 inline-block align-middle" />
+                  <span className="align-middle">-Easy</span>
+                </h3>
+              </div>
               <p className="footer__desc">
                 Connecting you with authentic Moroccan craftsmanship. Each piece tells a
                 story of tradition, skill, and cultural heritage passed down through generations.
@@ -24,12 +35,12 @@ const Footer = () => {
             <div className="footer__col">
               <h4 className="footer__title">Shop</h4>
               <ul className="footer__links">
-                <li><a href="#">Carpets & Rugs</a></li>
-                <li><a href="#">Pottery & Ceramics</a></li>
-                <li><a href="#">Leather Goods</a></li>
-                <li><a href="#">Jewelry</a></li>
-                <li><a href="#">Textiles</a></li>
-                <li><a href="#">Custom Orders</a></li>
+                <li className="footer__animated-link"><a href="/shop/carpets">Carpets & Rugs</a></li>
+                <li className="footer__animated-link"><a href="/shop/pottery">Pottery & Ceramics</a></li>
+                <li className="footer__animated-link"><a href="/shop/leather">Leather Goods</a></li>
+                <li className="footer__animated-link"><a href="/shop/jewelry">Jewelry</a></li>
+                <li className="footer__animated-link"><a href="/shop/textiles">Textiles</a></li>
+                <li className="footer__animated-link"><a href="/shop/custom">Custom Orders</a></li>
               </ul>
             </div>
 
@@ -37,12 +48,12 @@ const Footer = () => {
             <div className="footer__col">
               <h4 className="footer__title">Support</h4>
               <ul className="footer__links">
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Shipping Info</a></li>
-                <li><a href="#">Returns</a></li>
-                <li><a href="#">Size Guide</a></li>
-                <li><a href="#">Care Instructions</a></li>
-                <li><a href="#">FAQ</a></li>
+                <li className="footer__animated-link"><a href="/contact">Contact Us</a></li>
+                <li className="footer__animated-link"><a href="/shop">Shop Now</a></li>
+                <li className="footer__animated-link"><a href="/artisans">Artisans</a></li>
+                <li className="footer__animated-link"><a href="/size-guide">Size Guide</a></li>
+                <li className="footer__animated-link"><a href="/care">Care Instructions</a></li>
+                <li className="footer__animated-link"><a href="/faq">FAQ</a></li>
               </ul>
             </div>
           </div>
@@ -62,7 +73,23 @@ const Footer = () => {
       </footer>
 
       {/* CSS inside the same file */}
-      <style>{`
+  <style>{`
+        .footer__animated-link a {
+          background: linear-gradient(135deg, hsla(15, 75%, 55%, 0.5) 0%, hsla(45, 31%, 95%, 1.00) 100%);
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+          animation: gradientMove 2.5s linear infinite alternate;
+          font-weight: 700;
+        }
+        @keyframes gradientMove {
+          0% {
+            background-position: 0% 50%;
+          }
+          100% {
+            background-position: 100% 50%;
+          }
+        }
         .footer {
           background-color: #111827;
           color: #ffffff;

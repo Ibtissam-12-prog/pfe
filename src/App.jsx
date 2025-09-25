@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 
@@ -9,6 +10,8 @@ import Catalogue from "./Pages/Catalogue";
 import Contact from "./Pages/Contact";
 import Shop from "./Pages/Shop";
 import Customize from "./Pages/Customize";
+import Auth from "./Pages/Auth"; // صفحة جديدة للـ Register/Login/Profile
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -21,6 +24,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/customize" element={<Customize />} />
+        <Route path="/auth" element={<Auth />} /> {/* هادي صفحة الـ auth */}
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </>

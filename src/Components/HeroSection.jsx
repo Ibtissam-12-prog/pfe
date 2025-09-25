@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import heroImage from "/hero-artisans.jpg";
 
 export default function HeroSection() {
+  const navigate = useNavigate();
+
   const heroSectionStyle = {
     width: "100%",
     height: "100vh",
@@ -79,6 +82,11 @@ export default function HeroSection() {
     transition: "all 0.3s ease",
   };
 
+  // Handler for button click
+  const handleCollectionClick = () => {
+    navigate("/collection");
+  };
+
   return (
     <section style={heroSectionStyle}>
       <div style={overlayStyle}></div>
@@ -101,7 +109,9 @@ export default function HeroSection() {
           lovingly handmade by skilled artisans, preserving centuries-old
           traditions while creating modern treasures for your home.
         </p>
-        <button style={heroButtonStyle}>Show Our Collection</button>
+        <button style={heroButtonStyle} onClick={handleCollectionClick}>
+          Show Our Collection
+        </button>
       </div>
     </section>
   );

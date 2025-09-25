@@ -8,57 +8,84 @@ export default function Shop() {
   const products = [
     {
       id: 1,
-      name: "Tapis Berbère Traditionnel",
-      price: 1200,
-      image: "/img1.png",
-      category: "Tapis",
+      name: "Traditional Berber Carpet",
+      price: 400,
+      image: "tapis2.jpg",
+      category: "Carpets",
       stock: 5,
-      description: "Tapis berbère authentique fait main avec des motifs traditionnels"
+      description: "Authentic handmade Berber carpet with traditional patterns"
     },
     {
       id: 2,
-      name: "Set de Poterie Artisanale",
-      price: 450,
-      image: "/img2.png",
-      category: "Poterie",
+      name: "Handmade Pottery Set",
+      price: 200,
+      image: "article10.jpg",
+      category: "Pottery",
       stock: 8,
-      description: "Ensemble de poterie marocaine peinte à la main"
+      description: "Set of Moroccan pottery hand-painted"
     },
     {
       id: 3,
-      name: "Coussin Brodé à la Main",
+      name: "Hand-Embroidered Cushion",
       price: 300,
-      image: "/img3.png",
+      image: "article11.jpg",
       category: "Textile",
       stock: 12,
-      description: "Coussin décoratif avec broderie traditionnelle"
+      description: "Decorative cushion with traditional embroidery"
     },
     {
       id: 4,
-      name: "Lanterne Marocaine",
-      price: 550,
-      image: "/img4.png",
-      category: "Décoration",
+      name: "Moroccan Lantern",
+      price: 450,
+      image: "article12.jpg",
+      category: "Decoration",
       stock: 6,
-      description: "Lanterne artisanale en métal et verre coloré"
+      description: "Handcrafted lantern in metal and colored glass"
     },
     {
       id: 5,
-      name: "Service à Thé Traditionnel",
-      price: 850,
-      image: "/img5.png",
-      category: "Vaisselle",
+      name: "Traditional Tea Set",
+      price: 300,
+      image: "arcticl13.jpg",
+      category: "Tableware",
       stock: 4,
-      description: "Service à thé complet en métal ciselé"
+      description: "Complete tea set in engraved metal"
     },
     {
       id: 6,
-      name: "Plateau en Cuivre",
-      price: 600,
-      image: "/img6.png",
-      category: "Vaisselle",
+      name: "Copper Tray",
+      price: 300,
+      image: "article14.jpg",
+      category: "Tableware",
       stock: 7,
-      description: "Plateau décoratif en cuivre gravé à la main"
+      description: "Decorative copper tray hand-engraved"
+    },
+    {
+      id: 7,
+      name: "Berber Silver Necklace",
+      price: 750,
+      image: "article15.jpg",
+      category: "Jewelry",
+      stock: 10,
+      description: "Traditional Berber necklace in silver, handmade"
+    },
+    {
+      id: 8,
+      name: "Copper and Bead Bracelet",
+      price: 450,
+      image: "article16.jpg",
+      category: "Jewelry",
+      stock: 15,
+      description: "Artisan bracelet in copper with colorful beads"
+    },
+    {
+      id: 9,
+      name: "Moroccan Tekhmal Necklace",
+      price: 650,
+      image: "article17.jpg",
+      category: "Jewelry",
+      stock: 20,
+      description: "Traditional Moroccan 'Tekhmal' necklace in golden filigree, adorned with crafted beads and elegant black stones, symbol of refinement and artisanal heritage."
     }
   ];
 
@@ -102,11 +129,11 @@ export default function Shop() {
         <div className="cart-overlay">
           <div className="cart-content">
             <div className="cart-header">
-              <h2>Votre Panier</h2>
+              <h2>Your Cart</h2>
               <button className="close-cart" onClick={() => setIsCartOpen(false)}>×</button>
             </div>
             {cart.length === 0 ? (
-              <p className="empty-cart">Votre panier est vide</p>
+              <p className="empty-cart">Your cart is empty</p>
             ) : (
               <>
                 <div className="cart-items">
@@ -131,7 +158,7 @@ export default function Shop() {
                     <span>Total:</span>
                     <span>{getTotalPrice()} DH</span>
                   </div>
-                  <button className="checkout-button">Procéder au paiement</button>
+                  <button className="checkout-button">Checkout</button>
                 </div>
               </>
             )}
@@ -141,30 +168,31 @@ export default function Shop() {
 
       {/* Main Content */}
       <div className="shop-hero">
-        <h1>Notre Boutique</h1>
-        <p>Découvrez notre collection d'artisanat marocain authentique</p>
+        <h1>Our Shop</h1>
+        <p>Discover our collection of authentic Moroccan crafts</p>
       </div>
 
       <div className="shop-content">
         <div className="shop-header">
           <div className="shop-filters">
             <select defaultValue="all">
-              <option value="all">Toutes les catégories</option>
-              <option value="tapis">Tapis</option>
-              <option value="poterie">Poterie</option>
+              <option value="all">All categories</option>
+              <option value="tapis">Carpets</option>
+              <option value="poterie">Pottery</option>
               <option value="textile">Textile</option>
-              <option value="decoration">Décoration</option>
-              <option value="vaisselle">Vaisselle</option>
+              <option value="decoration">Decoration</option>
+              <option value="vaisselle">Tableware</option>
+              <option value="bijoux">Jewelry</option>
             </select>
             <select defaultValue="featured">
-              <option value="featured">En vedette</option>
-              <option value="price-low">Prix croissant</option>
-              <option value="price-high">Prix décroissant</option>
-              <option value="newest">Plus récents</option>
+              <option value="featured">Featured</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="newest">Newest</option>
             </select>
           </div>
           <button className="cart-button" onClick={() => setIsCartOpen(true)}>
-            Panier ({cart.reduce((total, item) => total + item.quantity, 0)})
+            Cart ({cart.reduce((total, item) => total + item.quantity, 0)})
           </button>
         </div>
 
@@ -174,7 +202,7 @@ export default function Shop() {
               <div className="product-image">
                 <img src={product.image} alt={product.name} />
                 <div className="product-overlay">
-                  <button onClick={() => addToCart(product)}>Ajouter au panier</button>
+                  <button onClick={() => addToCart(product)}>Add to cart</button>
                 </div>
               </div>
               <div className="product-info">
@@ -183,7 +211,7 @@ export default function Shop() {
                 <p className="product-description">{product.description}</p>
                 <div className="product-footer">
                   <span className="product-price">{product.price} DH</span>
-                  <span className="product-stock">En stock: {product.stock}</span>
+                  <span className="product-stock">In stock: {product.stock}</span>
                 </div>
               </div>
             </div>

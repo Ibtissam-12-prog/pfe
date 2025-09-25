@@ -1,9 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import ArtisanCard from "./ArtisanCard";
 import InfoBox from "./InfoBox";
 import "./ArtisansSection.css";
 
 export default function ArtisansSection() {
+  const navigate = useNavigate();
+
+  // Handlers for button clicks
+  const goToArtisans = () => {
+    navigate("/artisans");
+  };
+
+  const goToStory = () => {
+    navigate("/artisans"); // or change to another route if you have a story page
+  };
+
   return (
     <section className="artisans-section">
       <div className="container">
@@ -43,11 +55,16 @@ export default function ArtisansSection() {
           </div>
 
           <div className="actions">
-            <button className="btn primary">Meet Our Team</button>
-            <button className="btn ghost">Learn Our Story</button>
+            <button className="btn primary" onClick={goToArtisans}>
+              Meet Our Team
+            </button>
+            <button className="btn ghost" onClick={goToStory}>
+              Learn Our Story
+            </button>
           </div>
         </div>
       </div>
     </section>
   );
 }
+

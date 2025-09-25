@@ -30,74 +30,74 @@ export default function Artisanas() {
     {
       id: 1,
       name: "Fatima Zahra",
-      specialty: "Tissage traditionnel",
+      specialty: "Traditional weaving",
       image: "Tissage.jpg",
-      description: "Experte en tissage traditionnel marocain avec plus de 15 ans d'expérience.",
-      products: ["Tapis", "Couvertures", "Textiles décoratifs"]
+      description: "Expert in traditional Moroccan weaving with over 15 years of experience.",
+      products: ["Carpets", "Blankets", "Decorative textiles"]
     },
     {
       id: 2,
       name: "Mohammed Alami",
-      specialty: "Poterie et Céramique",
+      specialty: "Pottery and Ceramics",
       image: "artisansCeramique.jpg",
-      description: "Maître artisan spécialisé dans la poterie traditionnelle et moderne.",
-      products: ["Vases", "Services de table", "Décorations murales"]
+      description: "Master craftsman specializing in traditional and modern pottery.",
+      products: ["Vases", "Tableware", "Wall decorations"]
     },
     {
       id: 3,
       name: "Amina Benali",
-      specialty: "Broderie",
+      specialty: "Embroidery",
       image: "tarz.png",
-      description: "Artisane talentueuse créant des pièces uniques de broderie marocaine.",
-      products: ["Caftans", "Nappes brodées", "Coussins décoratifs"]
+      description: "Talented artisan creating unique pieces of Moroccan embroidery.",
+      products: ["Caftans", "Embroidered tablecloths", "Decorative cushions"]
     },
     {
       id: 4,
       name: "Karim Mansouri",
-      specialty: "Travail du Bois",
+      specialty: "Woodwork",
       image: "najar.jpg",
-      description: "Artisan spécialisé dans la sculpture sur bois et la création de meubles traditionnels.",
-      products: ["Meubles", "Sculptures", "Portes traditionnelles"]
+      description: "Artisan specializing in wood carving and traditional furniture making.",
+      products: ["Furniture", "Sculptures", "Traditional doors"]
     },
     {
       id: 5,
       name: "Youssef Benjelloun",
       specialty: "Zellige",
       image: "zellige.jpg",
-      description: "Maître artisane spécialisée dans l'art du zellige marocain traditionnel.",
-      products: ["Mosaïques", "Fontaines", "Tableaux décoratifs"]
+      description: "Master artisan specializing in traditional Moroccan zellige art.",
+      products: ["Mosaics", "Fountains", "Decorative panels"]
     },
     {
       id: 6,
       name: "Hassan Tazi",
-      specialty: "Ferronnerie d'art",
+      specialty: "Artistic Ironwork",
       image: "hadid.jpg",
-      description: "Ferronnier d'art créant des pièces uniques en métal forgé.",
-      products: ["Lanternes", "Portes en fer forgé", "Objets décoratifs"]
+      description: "Artistic blacksmith creating unique pieces in wrought iron.",
+      products: ["Lanterns", "Wrought iron doors", "Decorative objects"]
     },
     {
       id: 7,
       name: "Samira El Fassi",
-      specialty: "Bijouterie traditionnelle",
+      specialty: "Traditional Jewelry",
       image: "bijoux.jpg",
-      description: "Créatrice de bijoux traditionnels marocains en argent et pierres précieuses.",
-      products: ["Colliers", "Bracelets", "Boucles d'oreilles"]
+      description: "Creator of traditional Moroccan jewelry in silver and precious stones.",
+      products: ["Necklaces", "Bracelets", "Earrings"]
     },
     {
       id: 8,
       name: "Youssef Benjelloun",
-      specialty: "Maroquinerie",
+      specialty: "Leatherwork",
       image: "jald.png",
-      description: "Artisan maroquinier spécialisé dans le travail du cuir traditionnel.",
-      products: ["Sacs", "Poufs", "Accessoires en cuir"]
+      description: "Leather craftsman specializing in traditional leatherwork.",
+      products: ["Bags", "Poufs", "Leather accessories"]
     },
     {
       id: 9,
       name: "Nadir Ziani",
-      specialty: "Calligraphie",
+      specialty: "Calligraphy",
       image: "https://i.pinimg.com/originals/dd/48/e5/dd48e513b257c74a8e44a6453f912d7b.jpg",
-      description: "Calligraphe experte en art traditionnel arabe et design moderne.",
-      products: ["Tableaux", "Objets personnalisés", "Œuvres sur mesure"]
+      description: "Expert calligrapher in traditional Arabic art and modern design.",
+      products: ["Paintings", "Custom objects", "Custom works"]
     }
   ];
 
@@ -107,8 +107,8 @@ export default function Artisanas() {
       <div className={`artisanas-container ${showForm ? "dimmed" : ""}`}>
         {/* Hero */}
         <div className="artisanas-hero" data-aos="fade-down">
-          <h1>Nos Artisans Exceptionnels</h1>
-          <p>Découvrez le talent et le savoir-faire de nos artisans marocains</p>
+          <h1>Our Exceptional Artisans</h1>
+          <p>Discover the talent and craftsmanship of our Moroccan artisans</p>
         </div>
 
         {/* Grid */}
@@ -207,50 +207,38 @@ export default function Artisanas() {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="artisanas-cta" data-aos="flip-up">
-          <h2>Vous êtes un artisan ?</h2>
-          <p>Rejoignez notre communauté et partagez votre talent avec le monde</p>
-          <button 
-            className="join-us-btn" 
-            onClick={handleJoinClick}
-          >
-            Rejoignez-nous
-          </button>
-        </div>
-      </div>
-
-      {/* Modal */}
-      {showForm && (
-        <div className="modal-overlay">
-          <div className="modal-form" data-aos="zoom-in">
-            <button className="close-btn" onClick={handleFormClose}>✖</button>
-            <h2>{isLogin ? "Connexion" : "Inscription"}</h2>
-            <form>
-              {!isLogin && (
+        {/* Modal */}
+        {showForm && (
+          <div className="modal-overlay">
+            <div className="modal-form" data-aos="zoom-in">
+              <button className="close-btn" onClick={handleFormClose}>✖</button>
+              <h2>{isLogin ? "Connexion" : "Inscription"}</h2>
+              <form>
+                {!isLogin && (
+                  <div className="form-group">
+                    <input type="text" placeholder="Nom complet" required />
+                  </div>
+                )}
                 <div className="form-group">
-                  <input type="text" placeholder="Nom complet" required />
+                  <input type="text" placeholder="Nom utilisateur" required />
                 </div>
-              )}
-              <div className="form-group">
-                <input type="text" placeholder="Nom utilisateur" required />
-              </div>
-              <div className="form-group">
-                <input type="password" placeholder="Mot de passe" required />
-              </div>
-              <button type="submit" className="submit-btn">
-                {isLogin ? "Se connecter" : "S'inscrire"}
-              </button>
-            </form>
-            <p className="switch-form">
-              {isLogin ? "Pas de compte ?" : "Déjà inscrit ?"}{" "}
-              <span onClick={() => setIsLogin(!isLogin)}>
-                {isLogin ? "Inscription" : "Connexion"}
-              </span>
-            </p>
+                <div className="form-group">
+                  <input type="password" placeholder="Mot de passe" required />
+                </div>
+                <button type="submit" className="submit-btn">
+                  {isLogin ? "Se connecter" : "S'inscrire"}
+                </button>
+              </form>
+              <p className="switch-form">
+                {isLogin ? "Pas de compte ?" : "Déjà inscrit ?"}{" "}
+                <span onClick={() => setIsLogin(!isLogin)}>
+                  {isLogin ? "Inscription" : "Connexion"}
+                </span>
+              </p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }
